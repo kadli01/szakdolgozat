@@ -28,9 +28,9 @@ class AuthController extends ResponseController
 			'street'		=> 'nullable',
 			'house_numer' 	=> 'nullable',
 
-			// 'birth_year'	=> 'required|integer|min:1900|max:' . Carbon::today()->format('Y'),
-			// 'birth_month'	=> 'required|integer|min:1|max:12',
-			// 'birth_date'	=> 'required|integer|min1|max:31',
+			'birth_year'	=> 'required|integer|min:1900|max:' . Carbon::today()->format('Y'),
+			'birth_month'	=> 'required|integer|min:1|max:12',
+			'birth_day'		=> 'required|integer|min:1|max:31',
 		]);
 
 		if ($validator->fails()) {
@@ -47,7 +47,9 @@ class AuthController extends ResponseController
 		$user->last_name 	= $request->last_name;
 		$user->gender 		= $request->gender;
 		$user->phone 		= $request->phone;
-		$user->birth_date	= $request->birth_date;
+
+		$birth_date = $request->birth_year . '-' . $request->birth_month . '-' . $request->birth_day;
+		$user->birth_date = $birth_date;
 
 		if ($user->save())
 		{
@@ -102,7 +104,7 @@ class AuthController extends ResponseController
     }
 
     public function logout(Request $request)
-    {
+    {	\Log::info(print_r($request->all(), true));
     	if (! $user = JWTAuth::parseToken()->authenticate()) 
     	{
     		return $this->respondWithError('User not found!');
