@@ -1,5 +1,7 @@
 <?php
 
+require_once(app_path('Helpers/Input.php'));
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,5 +14,26 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	// return view('home');
+    return redirect('/admin/foods');
 });
+
+// Route::get('/home', function () {
+// 	return view('home');
+// });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+
+	Route::resource('users', 'Admin\UserController')->except(['create', 'store']);
+	Route::resource('foods', 'Admin\FoodController');
+
+
+	Route::get('/lohere', function(){
+		dd(Auth::user());
+	});
+});
+

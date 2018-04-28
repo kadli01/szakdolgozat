@@ -23,9 +23,9 @@ Route::group(['prefix' => '/auth'], function(){
 	Route::post('/password', 'Api\AuthController@password');
 	Route::post('/password/reset', 'Api\AuthController@passwordReset');
 
-	Route::group(['middleware' => 'jwt.auth'], function(){
-		Route::get('/me', 'AuthController@me');
-		Route::get('/logout', 'AuthController@logout');
-		Route::get('/refresh', 'AuthController@refresh');
-	});
+	// Route::group(['middleware' => 'jwt.auth'], function(){
+		Route::get('/me', 'Api\AuthController@me');
+		Route::get('/logout', 'Api\AuthController@logout');
+		Route::get('/refresh', 'Api\AuthController@refresh');
+	// });
 });
