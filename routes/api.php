@@ -29,3 +29,4 @@ Route::group(['prefix' => '/auth'], function(){
 		Route::get('/refresh', 'Api\AuthController@refresh');
 	// });
 });
+

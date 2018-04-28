@@ -17,7 +17,7 @@ class FoodController extends Controller
 	 */
 	public function index()
 	{
-		$foods = Food::orderBy('created_at', 'DESC')->paginate(10);
+		$foods = Food::orderBy('name', 'ASC')->paginate(10);
 
 		return view('admin.food.index', compact('foods'));
 	}
