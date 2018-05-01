@@ -104,7 +104,7 @@ class AuthController extends ResponseController
     }
 
     public function logout(Request $request)
-    {	\Log::info(print_r($request->all(), true));
+    {
     	if (! $user = JWTAuth::parseToken()->authenticate()) 
     	{
     		return $this->respondWithError('User not found!');

@@ -12,6 +12,6 @@ $factory->define(App\Food::class, function (Faker $faker) {
         'sugar' 		=> rand(1, 50),
         'salt' 			=> rand(1, 50),
         'fiber'			=> rand(1, 50),
-        // 'category_id'	=> rand(0, App\Category::max('id')),
+        'category_id'	=> rand(1, App\Category::max('id')),
     ];
 });

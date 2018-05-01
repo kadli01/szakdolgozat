@@ -47,4 +47,9 @@ class User extends Authenticatable implements JWTSubject
 	{
 		return [];
 	}
+
+	public function foods()
+	{
+		return $this->belongsToMany(Food::class, 'user_foods', 'user_id', 'food_id')->withPivot('date', 'quantity', 'id');
+	}
 }
