@@ -31,12 +31,12 @@ class AuthMiddleware extends \Tymon\JWTAuth\Http\Middleware\BaseMiddleware
             $user = $this->auth->authenticate($token);
 
         } catch (TokenExpiredException $exception) {
-\Log::info('exp');
             try {
-                $newtoken = $this->auth->refresh();
-                \Log::info($newtoken);
+                $newtoken = $this->auth->setRequest($request)->parseToken()->refresh();
+                $response = $next($request);
+                return $response->header('Authorization', 'Bearer '.$newtoken);
             } catch (JWTException $e) {
-                \Log::info($e);
+
                 return response()->json([
                     'status' => 'error',
                     'status_code' => Res::HTTP_UNAUTHORIZED,

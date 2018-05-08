@@ -34,5 +34,7 @@ Route::group(['prefix' => '/calculator', 'middleware' => ['jwtauth']], function(
 // Route::group(['prefix' => '/calculator', 'middleware' => ['jwt.refresh']], function(){
 	Route::get('/index', 'Api\CalculatorController@index');
 	Route::post('/add', 'Api\CalculatorController@add');
+	Route::post('/delete', 'Api\CalculatorController@delete');
+	Route::post('/statistics', 'Api\CalculatorController@statistics');
 });
 
