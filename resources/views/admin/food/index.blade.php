@@ -5,14 +5,28 @@
 	<h1>Foods</h1>
 	<small>Overview, editing</small>
 	<a href="{{ route('foods.create') }}" class="btn btn-lg btn-primary pull-right">New</a>
+	<form method="GET" action="{{ route('foods.index') }}">
+		<input type="text" name="keyword" placeholder="keyword" value="{{ Request::input('keyword') }}">
+		<label>Category</label>
+		<select name="category">
+			{{-- <option value="" selected disabled>Categories</option> --}}
+			<option value="">All</option>
+			@foreach($categories as $category)
+				<option value="{{ $category->id }}" @if(Request::input('category') == $category->id) selected @endif>{{ $category->name }}</option>
+			@endforeach
+		</select>
+		<button type="submit" name="submit" value="Search">Search</button>
+	</form>
 </div>
 
 <div class="dashboard-content">
+	@if(count($foods) > 0)
 	<table class="table">
 		<thead>
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
+				<th>Category</th>
 				<th>Energy (kcal)</th>
 				<th>Protein (g)</th>
 				<th>Fat (g)</th>
@@ -28,6 +42,7 @@
 				<tr>
 					<td>{{ $food->id }}</td>
 					<td><a href="{{ route('foods.show', ['id' => $food->id]) }}">{{ $food->name }}</a></td>
+					<td>{{ $food->category->name }}</td>
 					<td>{{ $food->energy }}</td>
 					
 					<td>{{ $food->protein }}</td>
@@ -60,5 +75,10 @@
 	<div class="text-center">
 		{!! $foods->render() !!}
 	</div>
+	@else
+		<div class="text-center">
+			<h3>No items found.</h3>
+		</div>
+	@endif
 </div>
 @endsection

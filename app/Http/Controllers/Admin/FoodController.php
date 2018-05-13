@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Validator;
 
 use App\Food;
+use App\Category;
 
 class FoodController extends Controller
 {
@@ -15,11 +16,25 @@ class FoodController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index()
+	public function index(Request $request)
 	{
-		$foods = Food::orderBy('name', 'ASC')->paginate(10);
+		$foods = Food::orderBy('name', 'ASC');
+		
+		if ($request->keyword) 
+		{
+			$foods = $foods->where('name', 'LIKE', '%' . $request->keyword . '%');			
+		}
 
-		return view('admin.food.index', compact('foods'));
+		if ($request->category) 
+		{
+			$foods = $foods->where('category_id', $request->category);
+		}
+		
+		$foods = $foods->paginate(10);
+
+		$categories = Category::all();
+
+		return view('admin.food.index', compact('foods', 'categories'));
 	}
 
 	/**
@@ -94,13 +109,14 @@ class FoodController extends Controller
 	public function show($id)
 	{
 		$food = Food::where('id', $id)->first();
+		$categories = Category::all();
 
 		if(!$food)
 		{
 			return redirect()->back()->withErrors('Item not found');
 		}
 
-		return view('admin.food.show', compact('food'));
+		return view('admin.food.show', compact('food', 'categories'));
 	}
 
 	/**
@@ -112,13 +128,14 @@ class FoodController extends Controller
 	public function edit($id)
 	{
 		$food = Food::where('id', $id)->first();
+		$categories = Category::all();
 
 		if(!$food)
 		{
 			return redirect()->back()->withErrors('Item not found');
 		}
 
-		return view('admin.food.edit', compact('food'));
+		return view('admin.food.edit', compact('food', 'categories'));
 	}
 
 	/**

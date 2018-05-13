@@ -61,7 +61,6 @@ class CalculatorController extends ResponseController
 
     public function statistics(Request $request)
     {
-        \Log::info($request->all());
         $validator = Validator::make($request->all(),
         [
             'startDate'   => 'nullable|date_format: "Y-m-d"',

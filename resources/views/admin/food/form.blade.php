@@ -9,8 +9,10 @@
 			</div>
 			<div class="col-md-6">
 				<label>Category</label>
-				<select class="form-control"name="category_id" value="{{ checkOld('category_id', $food) }}" autocomplete="off">
-					{{-- <option value="0" selected>0</option> --}}
+				<select class="form-control" name="category_id" value="{{ checkOld('category_id', $food) }}" autocomplete="off">
+					@foreach($categories as $category)
+						<option value="{{ $category->id }}" @if($food->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+					@endforeach
 				</select>
 			</div>
 		</div>
