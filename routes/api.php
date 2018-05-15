@@ -28,6 +28,8 @@ Route::group(['prefix' => '/auth'], function(){
 		Route::get('/logout', 'Api\AuthController@logout');
 		Route::get('/refresh', 'Api\AuthController@refresh');
 	});
+
+	Route::get('/verify/{token}', 'Api\AuthController@verifyEmail');
 });
 
 Route::group(['prefix' => '/calculator', 'middleware' => ['jwtauth']], function(){
