@@ -16,7 +16,7 @@ class User extends Authenticatable implements JWTSubject
 	 * @var array
 	 */
 	protected $fillable = [
-		'name', 'email', 'password',
+		'name', 'email', 'password', 'is_verified',
 	];
 
 	/**
@@ -46,5 +46,10 @@ class User extends Authenticatable implements JWTSubject
 	public function getJWTCustomClaims()
 	{
 		return [];
+	}
+
+	public function foods()
+	{
+		return $this->belongsToMany(Food::class, 'user_foods', 'user_id', 'food_id')->withPivot('date', 'quantity', 'id');
 	}
 }

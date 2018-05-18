@@ -23,9 +23,20 @@ Route::group(['prefix' => '/auth'], function(){
 	Route::post('/password', 'Api\AuthController@password');
 	Route::post('/password/reset', 'Api\AuthController@passwordReset');
 
-	// Route::group(['middleware' => 'jwt.auth'], function(){
+	Route::group(['middleware' => ['jwtauth']], function(){
 		Route::get('/me', 'Api\AuthController@me');
 		Route::get('/logout', 'Api\AuthController@logout');
 		Route::get('/refresh', 'Api\AuthController@refresh');
-	// });
+	});
+
+	Route::get('/verify/{token}', 'Api\AuthController@verifyEmail');
 });
+
+Route::group(['prefix' => '/calculator', 'middleware' => ['jwtauth']], function(){
+// Route::group(['prefix' => '/calculator', 'middleware' => ['jwt.refresh']], function(){
+	Route::get('/index', 'Api\CalculatorController@index');
+	Route::post('/add', 'Api\CalculatorController@add');
+	Route::post('/delete', 'Api\CalculatorController@delete');
+	Route::post('/statistics', 'Api\CalculatorController@statistics');
+});
+

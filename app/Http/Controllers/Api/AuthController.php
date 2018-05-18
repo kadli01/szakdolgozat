@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use \Validator;
 use \DB;
+use \Mail;
 use \JWTAuth;
 use Carbon\Carbon;
 
+use \App\Mail\ResetPasswordMail;
+use \App\Mail\UserVerifyMail;
 use App\User;
 
 class AuthController extends ResponseController
@@ -57,13 +60,13 @@ class AuthController extends ResponseController
 				'user_id' => $user->id,
 				'verification_code' => $verificationCode
 			]);
+			\Log::info($request->url);
+		try {
+			Mail::to($user->email)->queue(new UserVerifyMail($verificationCode, $request->url));
 
-			// TODO: send welcome/ email verification mail
-			// try {
-				
-			// } catch (Exception $e) {
-				
-			// }
+		} catch (Exception $e) {
+			return $this->respondInternalError('Error while sendig email.');
+		}
 
 			return $this->respondWithSuccess($user, 'Successful registration!');
 		}
@@ -104,7 +107,7 @@ class AuthController extends ResponseController
     }
 
     public function logout(Request $request)
-    {	\Log::info(print_r($request->all(), true));
+    {
     	if (! $user = JWTAuth::parseToken()->authenticate()) 
     	{
     		return $this->respondWithError('User not found!');
@@ -127,7 +130,29 @@ class AuthController extends ResponseController
 			return $this->respondValidationError($validator->messages());
 		}
 
-		//send password reset email
+		$user = User::where('email', $request->email)->first();
+
+		if (!$user) {
+			return $this->respondWithError('Email not found!');
+		}
+
+		$token = str_random(60);
+
+		$url = $request->url . '/' . $token;
+
+		try {
+		 	Mail::to($request->email)->queue(new ResetPasswordMail($token, $url));
+
+		} catch (Exception $e) {
+
+			return $this->respondInternalError(trans('messages.email_error'));
+		} 
+
+		\DB::table('password_resets')->where('email', $request->email)->delete();
+		\DB::table('password_resets')->insert(['email' => $request->email, 'token' => $token, 'created_at' => \Carbon\Carbon::now()]);
+
+		return $this->respondWithSuccess([], 'Password reset email sent.');
+
 	}
 
 	public function passwordReset(Request $request)
@@ -142,8 +167,53 @@ class AuthController extends ResponseController
 			return $this->respondValidationError($validator->messages());
 		}
 
-		//reset password
+		$email = \DB::table('password_resets')->where('token', $request->token)->value('email');
+		
+		if(!$email)
+		{
+			return $this->respondWithError('This link is invalid!');
+		}
+
+		$user = User::where('email', $email)->first();
+		
+		if (!$user) 
+		{
+			return $this->respondWithError('Email not found!');
+		}
+
+		$user->password = bcrypt($request->password);
+		
+		if ($user->save()) 
+		{
+			\DB::table('password_resets')->where('email', $email)->delete();
+			
+			return $this->respondWithSuccess([], 'Password successfully changed!');
+		}
 	}
 
+	public function verifyEmail($token)
+	{
+		$record = DB::table('user_verifications')->where('verification_code', $token)->first();
+
+		if(!is_null($record))
+		{
+			$userId = $record->user_id;
+			
+			$user = User::find($userId);
+
+			if($user->is_verified == 1)
+			{
+				return $this->respondWithSuccess([], 'Account already verified.');
+			}
+
+			$user->update(['is_verified' => 1]);
+
+			DB::table('user_verifications')->where('verification_code',$token)->delete();
+
+			return $this->respondWithSuccess([], 'You have successfully verified your email address.');
+		}
+
+		return $this->respondWithError('Verification code is invalid.');
+	}
 
 }
