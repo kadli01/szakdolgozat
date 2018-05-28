@@ -50,6 +50,19 @@ class User extends Authenticatable implements JWTSubject
 
 	public function foods()
 	{
-		return $this->belongsToMany(Food::class, 'user_foods', 'user_id', 'food_id')->withPivot('date', 'quantity', 'id');
+		return $this->belongsToMany(Food::class, 'user_foods', 'user_id', 'food_id')->withPivot('date', 'quantity', 'id')
+			->selectRaw(
+				'foods.id,
+				foods.name,
+				foods.energy*user_foods.quantity/100 as energy,
+				foods.protein*user_foods.quantity/100 as protein,
+				foods.fat*user_foods.quantity/100 as fat,
+				foods.carbohydrate*user_foods.quantity/100 as carbohydrate,
+				foods.sugar*user_foods.quantity/100 as sugar,
+				foods.salt*user_foods.quantity/100 as salt,
+				foods.fiber*user_foods.quantity/100 as fiber,
+				foods.category_id'
+				// user_foods.*'
+			);
 	}
 }
