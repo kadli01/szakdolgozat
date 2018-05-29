@@ -14,39 +14,30 @@ class CategoriesTableSeeder extends Seeder
         $categories = [
         	[
         		'name' => 'Uncategorized',
-        		'image' => '',
         	],
         	[
         		'name' => 'Grain products',
-        		'image' => '',
         	],
         	[
         		'name' => 'Vegetables',
-        		'image' => '',
         	],
         	[
         		'name' => 'Fishes',
-        		'image' => '',
         	],
         	[
         		'name' => 'Seeds',
-        		'image' => '',
         	],
         	[
         		'name' => 'Fruits',
-        		'image' => '',
         	],
         	[
         		'name' => 'Dairy products',
-        		'image' => '',
         	],
         	[
         		'name' => 'Meats',
-        		'image' => '',
         	],
         	[
         		'name' => 'Other products',
-        		'image' => '',
         	],
         ];
 
