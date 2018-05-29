@@ -1,6 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
+<div class="dashboard-content user-edit">
 	<div class="dashboard-header">
 		<h1>{{ $food->name }}</h1>
 		<small>View item</small>
@@ -8,7 +9,7 @@
 	</div>
 
 	<div>
-		<div class="">
+		<div>
 			@include('admin.food.form')
 		</div>
 	</div>

@@ -45,7 +45,9 @@ class FoodController extends Controller
 	public function create()
 	{
 		$food = new Food;
-		return view('admin.food.create', compact('food'));
+		$categories = Category::all();
+		
+		return view('admin.food.create', compact('food', 'categories'));
 	}
 
 	/**

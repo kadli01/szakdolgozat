@@ -20,7 +20,7 @@
 
 	<!-- Styles -->
 	{{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
-	<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+	{{-- <link href="{{ asset('css/admin.css') }}" rel="stylesheet"> --}}
 	{{-- <link href="public/css/admin.css" rel="stylesheet"> --}}
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -37,23 +37,25 @@
 	<div id="wrapper" class=toggled>
 
 		<!-- Sidebar -->
-		<div id="sidebar-wrapper">
-			<ul class="sidebar-nav">
-				<li class="sidebar-brand">
-					<a href="#">
-						{{ config('app.name', 'Laravel') }}
-					</a>
-				</li>
-				<li>
-					<a href="{{ route('foods.index') }}">Foods</a>
-				</li>
-				<li>
-					<a href="{{ route('categories.index') }}">Categories</a>
-				</li>
-				<li>
-					<a href="{{ route('users.index') }}">Users</a>
-				</li>
-			</ul>
+		<div class="sidenav">
+			<div class="menu-container">
+				<ul>
+					<li class="sidebar-brand">
+						<a href="#">
+							{{ config('app.name', 'Laravel') }}
+						</a>
+					</li>
+					<li>
+						<a href="{{ route('foods.index') }}">Foods</a>
+					</li>
+					<li>
+						<a href="{{ route('categories.index') }}">Categories</a>
+					</li>
+					<li>
+						<a href="{{ route('users.index') }}">Users</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<!-- /#sidebar-wrapper -->
 

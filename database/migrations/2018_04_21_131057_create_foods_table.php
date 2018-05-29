@@ -13,7 +13,8 @@ class CreateFoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('foods', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) 
+        {
             $table->increments('id');
             $table->string('name');
             $table->integer('energy');
@@ -23,7 +24,7 @@ class CreateFoodsTable extends Migration
             $table->integer('sugar');
             $table->integer('salt');
             $table->integer('fiber');
-            $table->integer('category_id')->default(0);
+            $table->integer('category_id')->unsigned()->default(0);
             $table->timestamps();
         });
     }

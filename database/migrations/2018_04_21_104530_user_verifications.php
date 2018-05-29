@@ -16,8 +16,13 @@ class UserVerifications extends Migration
         Schema::create('user_verifications', function (Blueprint $table) 
         {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned();
             $table->string('verification_code');
+        });
+
+        Schema::table('user_verifications', function (Blueprint $table) 
+        {
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -31,10 +31,5 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 	Route::resource('users', 'Admin\UserController')->except(['create', 'store']);
 	Route::resource('foods', 'Admin\FoodController');
 	Route::resource('categories', 'Admin\CategoryController');
-
-
-	Route::get('/lohere', function(){
-		dd(Auth::user());
-	});
 });
 

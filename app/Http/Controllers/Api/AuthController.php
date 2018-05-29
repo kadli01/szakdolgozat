@@ -23,13 +23,13 @@ class AuthController extends ResponseController
 			'password'		=> 'required|min:6|confirmed|string|max:255',
 			'first_name'	=> 'required|string|max:255',
 			'last_name'		=> 'required|string|max:255',
-			'phone'			=> 'nullable|string|max:15',
+			// 'phone'			=> 'nullable|string|max:15',
 			'gender'		=> 'required|integer',
 			//google autocomplete?
-			'country'		=> 'nullable',
-			'city'			=> 'nullable',
-			'street'		=> 'nullable',
-			'house_numer' 	=> 'nullable',
+			// 'country'		=> 'nullable',
+			// 'city'			=> 'nullable',
+			// 'street'		=> 'nullable',
+			// 'house_numer' 	=> 'nullable',
 
 			'birth_year'	=> 'required|integer|min:1900|max:' . Carbon::today()->format('Y'),
 			'birth_month'	=> 'required|integer|min:1|max:12',
@@ -49,7 +49,6 @@ class AuthController extends ResponseController
 		$user->first_name 	= $request->first_name;
 		$user->last_name 	= $request->last_name;
 		$user->gender 		= $request->gender;
-		$user->phone 		= $request->phone;
 
 		$birth_date = $request->birth_year . '-' . $request->birth_month . '-' . $request->birth_day;
 		$user->birth_date = $birth_date;
@@ -60,7 +59,7 @@ class AuthController extends ResponseController
 				'user_id' => $user->id,
 				'verification_code' => $verificationCode
 			]);
-			\Log::info($request->url);
+
 		try {
 			Mail::to($user->email)->queue(new UserVerifyMail($verificationCode, $request->url));
 
@@ -87,7 +86,7 @@ class AuthController extends ResponseController
 		}
 
 		$credentials = $request->only('email', 'password');
-
+		
 		try
 		{
 			// attempt to verify the credentials and create a token for the user
@@ -101,7 +100,11 @@ class AuthController extends ResponseController
 			// something went wrong whilst attempting to encode the token
 			return $this->respondWithError('Failed to login, please try again.');
 		}
-
+		$user = User::where('email', $request->email)->first();
+		if ($user->is_verified == 0) 
+		{
+			return $this->respondWithError('You have to verify your e-mail address befor logging in. Pleas check your e-mails');
+		}
 		// all good so return the token
 		return $this->respondWithSuccess(['token' => $token], 'Successful login!');
     }
