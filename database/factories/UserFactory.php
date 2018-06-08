@@ -22,5 +22,6 @@ $factory->define(App\User::class, function (Faker $faker) {
         'birth_date' 	 => $faker->date,
        	'gender'		 => rand(1,2), 
         'remember_token' => str_random(10),
+        'is_verified'	 => 1,
     ];
 });

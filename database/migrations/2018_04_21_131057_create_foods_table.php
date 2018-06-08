@@ -24,7 +24,7 @@ class CreateFoodsTable extends Migration
             $table->integer('sugar');
             $table->integer('salt');
             $table->integer('fiber');
-            $table->integer('category_id')->unsigned()->default(0);
+            $table->integer('category_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

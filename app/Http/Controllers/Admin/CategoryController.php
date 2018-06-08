@@ -159,10 +159,17 @@ class CategoryController extends Controller
 	{
 		$category = Category::where('id', $id)->first();
 
+		if ($id == 1) 
+		{
+			return redirect()->back()->withErrors('Uncategorized can not be deleted.');
+		}
+
 		if(!$category)
 		{
 			return redirect()->back()->withErrors('Category not found');
-		} 
+		}
+
+		$category->foods()->update(['category_id' => 1]);
 
 		if($category->delete())
 		{

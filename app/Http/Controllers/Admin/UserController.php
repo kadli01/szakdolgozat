@@ -115,7 +115,7 @@ class UserController extends Controller
 
 		//detach user's saved items
 
-		// $user->foods()->detach();
+		$user->foods()->detach();
 
 		if($user->delete())
 		{
