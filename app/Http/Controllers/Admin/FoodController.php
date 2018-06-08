@@ -31,7 +31,7 @@ class FoodController extends Controller
 		}
 		
 		$foods = $foods->paginate(10);
-
+		
 		$categories = Category::all();
 
 		return view('admin.food.index', compact('foods', 'categories'));

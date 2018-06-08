@@ -16,9 +16,10 @@ class CalculatorController extends ResponseController
 {
     public function index(Request $request)
     {
-    	$categories = Category::with('foods')->get();
 
-    	$user = JWTAuth::parseToken()->authenticate();
+        $user = JWTAuth::parseToken()->authenticate();
+
+    	$categories = Category::with('foods')->get();
     	$userFoods = $user->foods->where('pivot.date', $request->date);
     	
     	return $this->respondWithSuccess(['categories' => $categories, 'userFoods' => $userFoods]);
@@ -39,7 +40,8 @@ class CalculatorController extends ResponseController
 		$user = JWTAuth::parseToken()->authenticate();
 
 		$user->foods()->attach($request->itemId, ['quantity' => $request->quantity, 'date' => $request->date]);
-		$userFood = $user->foods->last()->pivot->id;
+		
+        $userFood = $user->foods->last()->pivot->id;
 		$food = Food::where('id', $request->itemId)->first();
 
 		$returnData = ['userFood' => $userFood, 'food' => $food];
@@ -94,7 +96,7 @@ class CalculatorController extends ResponseController
     			SUM(fiber * quantity/100) as fiber, 
     			SUM(quantity) as quantity')
     		->get();
-
+            
     	$userCategories = Food::leftJoin('user_foods', 'foods.id', 'user_foods.food_id')
     		->leftJoin('categories', 'foods.category_id', 'categories.id')
     		->where('user_foods.user_id', $user->id)

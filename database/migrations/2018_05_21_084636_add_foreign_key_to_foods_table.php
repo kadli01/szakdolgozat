@@ -15,7 +15,7 @@ class AddForeignKeyToFoodsTable extends Migration
     {
         Schema::table('foods', function (Blueprint $table) 
         {
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
 
