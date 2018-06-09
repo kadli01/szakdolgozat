@@ -13,8 +13,8 @@
 			<tr>
 				<th>ID</th>
 				<th>Name</th>
-				<th>Image</th>
-				<th>Color</th>
+{{-- 				<th>Image</th>
+				<th>Color</th> --}}
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -23,8 +23,8 @@
 				<tr>
 					<td>{{ $category->id }}</td>
 					<td><a href="{{ route('categories.show', ['id' => $category->id]) }}">{{ $category->name }}</a></td>
-					<td>{{ $category->image }}</td>
-					<td>category color?</td>
+{{-- 					<td>{{ $category->image }}</td>
+					<td>category color?</td> --}}
 					<td class="btn-td">
 						<div class="dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Actions

@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         factory(User::class, 20)->create()
             ->each(function ($user) use ($foods)
             {
-                $startDate = Carbon::today()->subDays(7);
+                $startDate = Carbon::today()->subMonth();
                 $endDate = Carbon::today();
                 while ($endDate >= $startDate) 
                 {

@@ -36,6 +36,17 @@ class AuthController extends ResponseController
 			'birth_day'		=> 'required|integer|min:1|max:31',
 		]);
 
+		$validator->after(function ($validator) use($request)
+		{
+			$date = Carbon::parse($request->birth_year . '-' . $request->birth_month . '-' . $request->birth_day);
+
+			if ($date->day != $request->birth_day || $date->month != $request->birth_month) 
+			{
+				$validator->errors()->add('birth_year', 'Invalid date');
+			}
+
+		});
+
 		if ($validator->fails()) {
 			return $this->respondValidationError($validator->messages());
 		}
@@ -67,7 +78,7 @@ class AuthController extends ResponseController
 			return $this->respondInternalError('Error while sendig email.');
 		}
 
-			return $this->respondWithSuccess($user, 'Successful registration!');
+			return $this->respondWithSuccess($user, 'Successful registration! Please check your e-mails and click the verification link.');
 		}
 
 		return $this->respondWithError('Error while registering.');
