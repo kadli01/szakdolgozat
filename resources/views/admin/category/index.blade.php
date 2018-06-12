@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<div>
+<div class="dashboard-header">
 	<h1>Categories</h1>
 	<small>Overview, editing</small>
 	<a href="{{ route('categories.create') }}" class="btn btn-lg btn-primary pull-right">New</a>

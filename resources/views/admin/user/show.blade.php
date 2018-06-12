@@ -7,10 +7,8 @@
 		<a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-lg btn-primary pull-right">Edit</a>
 	</div>
 
-	<div>
-		<div class="">
-			@include('admin.user.form')
-		</div>
+	<div class="dashboard-content">
+		@include('admin.user.form')
 	</div>
 
 @endsection

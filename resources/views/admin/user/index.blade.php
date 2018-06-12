@@ -1,7 +1,7 @@
 @extends('layouts.template')
 
 @section('content')
-<div>
+<div class="dashboard-header">
 	<h1>Users</h1>
 	<small>Overview, editing</small>
 </div>
