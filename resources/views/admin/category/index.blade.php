@@ -36,7 +36,7 @@
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
 								<li>
-									<input type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure you want to delete this item: {{ $category->name }}?')">
+									<input type="submit" name="delete" value="Deleteee" onclick="return confirm('Are you sure you want to delete this item: {{ $category->name }}?')">
 								</li>
 							</form>
 							</ul>
