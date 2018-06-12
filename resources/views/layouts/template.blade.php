@@ -35,7 +35,11 @@
 	
 
 	<div id="wrapper" class=toggled>
-
+		<div class="title-container">
+            <a class="" href="{{ url('/') }}">
+                Szakdolgozat
+            </a>
+        </div>
 		<!-- Sidebar -->
 		<div class="sidenav">
 			<div class="menu-container">
@@ -107,36 +111,35 @@
         {{-- NAVBAR on top END --}}
 
 		<!-- Page Content -->
-		<div id="page-content-wrapper">
-			<div class="container-fluid">
-				<!-- On site errors -->
-				@if (\Session::has('error'))
-					<div class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						{{ \Session::get('error') }}
-					</div>
-				@endif
-				<!-- On site success -->
-				@if (\Session::has('success'))
-					<div class="alert alert-success alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						{{ \Session::get('success') }}
-					</div>
-				@endif
-				<!-- Validation errors -->
-				@if (isset($errors) && count($errors) > 0)
-					<div class="alert alert-danger alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<ul>
-							@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
-				@endif
-				
-				@yield('content')
-			</div>
+		<div id="page-content-wrapper" class="main">
+			<!-- On site errors -->
+			@if (\Session::has('error'))
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					{{ \Session::get('error') }}
+				</div>
+			@endif
+			<!-- On site success -->
+			@if (\Session::has('success'))
+				<div class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					{{ \Session::get('success') }}
+				</div>
+			@endif
+			<!-- Validation errors -->
+			@if (isset($errors) && count($errors) > 0)
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<ul>
+						@foreach ($errors->all() as $error)
+								<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
+			
+
+			@yield('content')
 		</div>
 		<!-- /#page-content-wrapper -->
 

@@ -7,10 +7,8 @@
 		<a href="{{ route('categories.edit', ['id' => $category->id]) }}" class="btn btn-lg btn-primary pull-right">Edit</a>
 	</div>
 
-	<div>
-		<div class="">
-			@include('admin.category.form')
-		</div>
+	<div class="dashboard-content">
+		@include('admin.category.form')
 	</div>
 
 @endsection

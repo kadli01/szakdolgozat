@@ -9,8 +9,6 @@ $shadow: 0 1px 1px rgba(0, 0, 0, .05);
 $shadow-1: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.10);
 $shadow-1-hover: 0 10px 20px rgba(0,0,0,0.10), 0 5px 5px rgba(0,0,0,0.10);
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&subset=cyrillic-ext,latin-ext');
-
 html {
 	font-size: 16px;
 }
@@ -19,7 +17,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	padding-left: 200px;
+	padding-left: 250px;
 	background-color: #fafafa;
 }
 
@@ -77,7 +75,7 @@ a {
 	&:hover,
 	&:focus {
 		text-decoration: none;
-		outline: none;
+
 	}
 
 }
@@ -102,7 +100,7 @@ select.form-control {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-ms-appearance: none;
-	background-image: url('../img/admin/select_arrow.png');
+	background-image: url('../img/select_arrow.png');
 	background-repeat: no-repeat;
 	background-size: 9px;
 	background-position: calc(100% - 10px) center;
@@ -579,15 +577,24 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 	font-weight: 700;
 	font-size: 1.25rem;
 	text-align: center;
-	padding: 17.5px 10px 17.5px 25px;
+	padding: 17.5px 10px 17.5px 10px;
 	background-color: #222;
 	border-right: 1px solid #121212;
 	position: fixed;
 	height: 70px;
 	left: 0;
 	top: 0;
-	width: 200px;
+	width: 250px;
 	z-index: 3000;
+
+	a {
+		color: #fff;
+		font-size: 14px;
+
+		&:hover {
+			color: $primary;
+		}
+	}
 
 	img {
 		height: 35px;
@@ -599,10 +606,9 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 200px;
+	width: 250px;
 	background-color: #fff;
 	overflow: auto;
-	z-index: 1000;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -621,7 +627,7 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 		padding-bottom: 15px;
 
 		.separator {
-			padding: 0px 17px;
+			padding: 0px 25px;
 		    text-transform: uppercase;
 		    font-size: 12px;
 		    color: #999;
@@ -634,7 +640,7 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
    		}
 						
 		a {
-			padding: 7px 8px 7px 10px;
+			padding: 7px 10px 7px 25px;
 			display: block;
 			border-left: 5px solid #fff;
 			color: #333;
@@ -661,13 +667,11 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 
 .main {
 
-	margin-top: 165px;
-
 	.dashboard-search {
 		height: 70px;
 		background-color: #333;
 		position: fixed;
-		left: 200px;
+		left: 250px;
 		top: 0;
 		right: 0;
 		z-index: 3000;
@@ -863,7 +867,7 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 		
 		padding: 15px 25px;
 		position: fixed;
-		left: 200px;
+		left: 250px;
 		top: 70px;
 		right: 0;
 		z-index: 1030;
@@ -909,28 +913,18 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 			}
 			
 			th {
-				padding: 10px;
+				padding: 15px;
 				border-bottom-color: #eee;
 			}
 			
 			td {
 				vertical-align: middle !important;
-				padding: 5px 10px;
+				padding: 15px;
+				padding-bottom: 15px;
 				border-top-color: #eee;
-				position: relative;
 				
 				.btn {
-					border-color: #fff;
-					padding: 9px 20px;
-					line-height: 1.42857143;
-					font-size: 1rem;
-					min-height: auto;
-					width: 100%;
-					text-align: left;
-
-					&:hover {
-						color: $primary;
-					}
+					min-width: 120px;
 				}
 				
 				.btn-primary {
@@ -940,11 +934,6 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 				.flag-icon {
 					height: 20px;
 					width: auto;
-				}
-
-				a {
-					color: $primary;
-					font-weight: 600;
 				}
 								
 			}
@@ -969,36 +958,6 @@ input[type=date].form-control, input[type=time].form-control, input[type=datetim
 			
 		}
 		
-	}
-
-	.dashboard-content--extension {
-		padding: 25px 25px 0 25px;
-
-		ul {
-			margin: 0;
-
-			li {
-				font-size: 14px;
-				line-height: 12px;
-
-				.circle {
-					height: 12px;
-					width: 12px;
-					display: inline-block;
-					margin-right: 5px;
-					background-color: red;
-					border-radius: 50%;
-				}
-			}
-		}
-	}
-
-	.dashboard-content--extension__busdates {
-		padding: 0 25px;
-	}
-
-	.dashboard-content--filters {
-		padding: 25px 25px 0 25px;
 	}
 	
 }
@@ -1131,6 +1090,19 @@ body.auth {
 	font-size: 13px;
 }
 
+.divider {
+	font-weight: 400;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	margin-top: 50px;
+	font-size: 26px;
+
+	&.first {
+		margin-top: 10px;
+	}
+}
+
 .user-edit, .festival-edit, .admin-edit {
 
 	h1 {
@@ -1142,18 +1114,6 @@ body.auth {
 		font-weight: 400;
 	}
 
-	.divider {
-		font-weight: 400;
-		border-bottom: 1px solid #eee;
-		padding-bottom: 10px;
-		margin-bottom: 20px;
-		margin-top: 50px;
-		font-size: 26px;
-
-		&.first {
-			margin-top: 10px;
-		}
-	}
 
 	.user-image {
 		height: 200px;
@@ -1194,6 +1154,7 @@ body.auth {
 
 		h4 {
 			font-size: 24px;
+			font-weight: 400;
 			margin-bottom: 30px;
 			margin-top: 10px;
 		}
@@ -1267,6 +1228,41 @@ body.auth {
 		}
 	}
 
+	.popup-div {
+		position: relative;
+
+		#show-popup {
+			cursor: pointer;
+		}
+
+		.status-popup {
+			position: absolute;
+			top: -60px;
+			right: 0;
+			background-color: #fff;
+			border: 1px solid transparent;
+			-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+			box-shadow: 0 1px 5px rgba(0,0,0,.1);
+
+			span {
+				font-size: 14px;
+			}
+
+			.d-flex {
+				margin-bottom: 0;
+			}
+
+			.item {
+				flex: 1;
+				display: flex;
+				padding: 15px 10px;
+
+				&:hover {
+					background-color: #eee;
+				}
+			}
+		}
+	}
 
 	.payment {
 
@@ -1284,78 +1280,6 @@ body.auth {
 			top: -10px;
 			padding: 9px 12px;
 		}
-	}
-}
-
-.popup-div {
-	position: relative;
-
-	#show-popup {
-		cursor: pointer;
-	}
-}
-
-.status-popup {
-	position: absolute;
-	top: -60px;
-	right: 0;
-	background-color: #fff;
-	border: 1px solid transparent;
-	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-	box-shadow: 0 1px 5px rgba(0,0,0,.1);
-	z-index: 100;
-
-	span {
-		font-size: 14px;
-		white-space: nowrap;
-	}
-
-	.d-flex {
-		margin-bottom: 0 !important;
-	}
-
-	.item {
-		flex: 1;
-		display: flex;
-		padding: 15px 10px;
-
-		&:hover {
-			background-color: #eee;
-		}
-
-	}
-	a:focus {
-		outline: none;
-	}
-}
-
-.job-application-status {
-
-	.status-popup {
-		top: -35px;
-		right: initial;
-		left: 0;
-	}
-}
-
-.btn-td {
-
-	input[type="submit"] {
-		background-color: transparent;
-		border: none;
-		display: block;
-	    padding: 3px 20px;
-	    line-height: 1.42857143;
-	    white-space: nowrap;
-	    transition: 0.3s all;
-	    width: 100%;
-	    text-align: left;
-
-	    &:hover,
-	    &:focus {
-	    	background-color: #f5f5f5;
-	    	color: $primary;
-	    }
 	}
 }
 
@@ -1382,7 +1306,7 @@ body.auth {
 	}
 }
 
-.contract_modal {
+#contract {
 
 	.modal__container {
 		display: flex;
@@ -1402,36 +1326,11 @@ body.auth {
 		}
 	}
 
+	
+
 	.d-flex {
 		justify-content: space-between;
 		margin-bottom: 20px;
-		width: 100%;
-		position: relative;
-
-		.item {
-			flex: 1;
-		}
-
-		.item:nth-of-type(2) {
-			flex: 0 0 20px;
-		}
-	}
-}
-
-.file-previews {
-
-	img, object {
-		position: absolute;
-		bottom: 20px;
-		left: 135px;
-		width: 100px;
-		height: 100px;
-		border: 5px solid #fff;
-		box-shadow: 2px 2px 15px rgba(0,0,0,0.5);
-		z-index: 1500;
-		background-color: #fff;
-		object-fit: contain;
-		object-position: center center;
 	}
 }
 
@@ -1456,10 +1355,6 @@ body.auth {
 	.modal__close:focus {
 		outline: none;
 	}
-}
-
-.micromodal-slide.is-open {
-	overflow: visible;
 }
 
 .mr-5 {
@@ -1524,149 +1419,19 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.justify-space-between {
-	justify-content: space-between;
+.navbar-laravel {
+	height: 70px;
+	background-color: #fff;
+	position: fixed;
+	left: 250px;
+	top: 0;
+	right: 0;
+	z-index: 3000;
 }
 
-.statistics-header {
-
-	.filter {
-
-		.btn {
-			position: static;
-			height: 42px;
-		}
-	}
-
-	.input-group {
-		width: 228px;
-	}
-
-	.input-item {
-		margin-left: 10px;
-	}
-
-	.date {
-		width: 185px;
-	}
+.main {
+	padding-top: 168px;
 }
-
-.statistics-content {
-	
-	.post-content {
-		margin-bottom: 50px;
-	}
-}
-
-.orders {
-
-	td, th {
-		min-width: 300px;
-	}
-
-	.orders-btn {
-
-		.btn {
-			width: auto !important;
-			text-align: center !important;
-		}
-	}
-}
-
-.color-table {
-	padding: 0 !important;
-	width: 70px;
-	height: 100%;
-
-	table {
-
-		td {
-			height: 71px;
-			width: 70px;
-			padding: 0 !important;
-		}
-	}
-}
-
-.passengers__list {
-
-	.passengers__list-row {
-		display: -ms-flex;
-		display: flex;
-		align-items: flex-end;
-	}
-}
-
-.color-list {
-	padding: 5px 0;
-
-	.color-list--item {
-		width: 20px;
-		height: 20px;
-		display: inline-block;
-		margin-right: 3px;
-		border-radius: 50%;
-	}
-}
-
-.popup-div input.form-control
-{
-	width: 200px;
-}
-
-.btn-info:hover
-{
-	color: #fff !important;
-}
-
-.btn-info, .btn-info.active, .btn-info:active, .btn-info:hover, .open>.dropdown-toggle.btn-info, .btn-info.active.focus, .btn-info.active:focus, .btn-info.active:hover, .btn-info:active.focus, .btn-info:active:focus, .btn-info:active:hover, .open>.dropdown-toggle.btn-info.focus, .open>.dropdown-toggle.btn-info:focus, .open>.dropdown-toggle.btn-info:hover
-{
-	background-color: $primary;
-	border-color: $primary;
-	opacity: 1;
-	color: #fff;
-}
-
-.main .dashboard-content table.datepicker-table 
-{
-	width: 100%;
-
-	td {
-		padding: 0;
-	}
-}
-
-.datepicker-table--helpers {
-	padding: 20px 0;
-
-	a {
-		font-weight: 700;
-	}
-} 
-
-.language-selector {
-
-	a {
-		color: #fff;
-	}
-
-}
-
-.language-selector.open {
-
-	a {
-		color: $primary;
-	}
-
-}
-
-
-
-
-
-
-
-
 
 
 
