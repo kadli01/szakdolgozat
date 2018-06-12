@@ -1,25 +1,34 @@
 @extends('layouts.template')
 
 @section('content')
-<div>
+<div class="dashboard-header">
 	<h1>Foods</h1>
 	<small>Overview, editing</small>
 	<a href="{{ route('foods.create') }}" class="btn btn-lg btn-primary pull-right">New</a>
-	<form method="GET" action="{{ route('foods.index') }}">
-		<input type="text" name="keyword" placeholder="keyword" value="{{ Request::input('keyword') }}">
-		<label>Category</label>
-		<select name="category">
-			{{-- <option value="" selected disabled>Categories</option> --}}
-			<option value="">All</option>
-			@foreach($categories as $category)
-				<option value="{{ $category->id }}" @if(Request::input('category') == $category->id) selected @endif>{{ $category->name }}</option>
-			@endforeach
-		</select>
-		<button type="submit" name="submit" value="Search">Search</button>
-	</form>
 </div>
 
 <div class="dashboard-content">
+	<form method="GET" action="{{ route('foods.index') }}" class="form-group">
+		<div class="row align-items-end">
+			<div class="col-md-4">
+				<label for="">Keyword</label>
+				<input type="text" name="keyword" class="form-control" placeholder="keyword" value="{{ Request::input('keyword') }}">
+			</div>
+			<div class="col-md-4">
+				<label>Category</label>
+				<select name="category" class="form-control">
+					{{-- <option value="" selected disabled>Categories</option> --}}
+					<option value="">All</option>
+					@foreach($categories as $category)
+						<option value="{{ $category->id }}" @if(Request::input('category') == $category->id) selected @endif>{{ $category->name }}</option>
+					@endforeach
+				</select>
+			</div>
+			<div class="col-md-4">
+				<button type="submit" name="submit" value="Search" class="btn btn-secondary">Search</button>
+			</div>
+		</div>
+	</form>
 	@if(count($foods) > 0)
 	<table class="table">
 		<thead>

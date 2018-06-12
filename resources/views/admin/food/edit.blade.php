@@ -8,14 +8,11 @@
 		<button type="submit" class="btn btn-lg btn-success pull-right" id="submit-form">Save</button>
 	</div>
 
-	<div>
-		<div class="">
-			
-			{{ csrf_field() }}
-			{{ method_field('PUT') }}
-			
-			@include('admin.food.form')
-		</div>
+	<div class="dashboard-content">
+		{{ csrf_field() }}
+		{{ method_field('PUT') }}
+		
+		@include('admin.food.form')
 	</div>
 </form>
 @endsection
