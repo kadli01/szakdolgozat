@@ -1433,9 +1433,22 @@ input:checked + .slider:before {
 	padding-top: 168px;
 }
 
+.btn-td {
 
+  input[type="submit"] {
+    background-color: transparent;
+    border: none;
+    display: block;
+      padding-left: 0px;
+      line-height: 1.42857143;
+      white-space: nowrap;
+      transition: 0.3s all;
+      width: 100%;
+      text-align: left;
 
-
-
-
-
+      &:hover,
+      &:focus {
+        color: $primary;
+      }
+  }
+}
