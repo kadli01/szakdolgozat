@@ -36,6 +36,10 @@ class AuthController extends ResponseController
 			'birth_day'		=> 'required|integer|min:1|max:31',
 		]);
 
+		if ($validator->fails()) {
+			return $this->respondValidationError($validator->messages());
+		}
+
 		$validator->after(function ($validator) use($request)
 		{
 			$date = Carbon::parse($request->birth_year . '-' . $request->birth_month . '-' . $request->birth_day);
